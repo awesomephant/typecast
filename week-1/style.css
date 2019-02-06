@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: black;
+}
+.copy {
+    font-size: 5rem;
+    text-align: center;
+    line-height: 0;
+    display: flex;
+    max-width: 100%;
+    height: 100vh;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.letter {
+    display: block;
+    flex-grow: 1;
+}
+
+.letter-image {
+    height: 20vw;
+    width: 100%;
+    image-rendering: crisp-edges;
+    filter: blur(.1vw) contrast(10) invert(1);
+}
+
+.dot-image {
+    height: 20vh;
+}
+
+.letter.space {
+    height: 20vh;
+    width: 5vw;
+    display: inline-block;
+}

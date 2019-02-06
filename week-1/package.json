@@ -1,0 +1,11 @@
+{
+    "name": "robotics",
+    "description": "",
+    "authors": "Max Kohler",
+    "version": "1.0.0",
+    "main": "",
+    "dependencies": {
+        "grunt": "*",
+        "grunt-contrib-connect": "*"
+    }
+}
