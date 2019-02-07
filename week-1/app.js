@@ -82,14 +82,14 @@ const updateCopy = function (copy) {
         if (letter != ' ' && letter != '.' && letter != ':' && letter != '-' && letter != ',' && letter != ']' && letter != '[') {
             let filename = ''
             if (isUpperCase(letter)){
-                filename = '/assets/edit/_' + letter + '-0.png'
+                filename = './assets/edit/_' + letter + '-0.png'
             } else {
-                filename = '/assets/edit/' + letter + '-0.png'
+                filename = './assets/edit/' + letter + '-0.png'
             }
             el = `<span class='letter'><img class='letter-image' src='${filename}'/></span>`
         } else if (letter === '.' || letter === ',' || letter === ':' || letter === ';' || letter === '-' || letter === ',' || letter === '[' || letter === ']') {
             let index = gri(0, counts.image - 1)
-            let filename = '/assets/' + 'image' + '-' + index + '.png'
+            let filename = './assets/' + 'image' + '-' + index + '.png'
             el = `<span class='letter'><img class='dot-image' src='${filename}'/></span>`
         } else {
             el = `<span class='letter space'></span>`
