@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    background: black;
+    background: rgb(250,250,250);
 }
 .copy {
     font-size: 5rem;
@@ -13,7 +13,7 @@ body {
     display: flex;
     max-width: 100%;
     height: 100vh;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
 }
@@ -21,13 +21,15 @@ body {
 .letter {
     display: block;
     flex-grow: 1;
+    font-size: 10vh;
+    margin-bottom: -5vh;
 }
-
 .letter-image {
     height: 20vw;
-    width: 100%;
+    width: auto;
+    mix-blend-mode: multiply;
     image-rendering: crisp-edges;
-    filter: blur(.1vw) contrast(10) invert(1);
+    filter: blur(0vw) contrast(1) invert(0);
 }
 
 .dot-image {

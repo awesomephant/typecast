@@ -2,7 +2,7 @@ let copy = '';
 let copyEl;
 
 const counts = {
-    image: 3,
+    image: 11,
     a: 1,
     b: 1,
     c: 1,
@@ -79,7 +79,7 @@ const updateCopy = function (copy) {
     for (let i = 0; i < letters.length; i++) {
         let letter = letters[i];
         let el;
-        if (letter != ' ' && letter != '.' && letter != ':' && letter != '-' && letter != ',') {
+        if (letter != ' ' && letter != '.' && letter != ':' && letter != '-' && letter != ',' && letter != ']' && letter != '[') {
             let filename = ''
             if (isUpperCase(letter)){
                 filename = '/assets/edit/_' + letter + '-0.png'
@@ -87,8 +87,8 @@ const updateCopy = function (copy) {
                 filename = '/assets/edit/' + letter + '-0.png'
             }
             el = `<span class='letter'><img class='letter-image' src='${filename}'/></span>`
-        } else if (letter === '.' || letter === ',' || letter === ':' || letter === ';' || letter === '-' || letter === ',') {
-            let index = gri(0, counts.image)
+        } else if (letter === '.' || letter === ',' || letter === ':' || letter === ';' || letter === '-' || letter === ',' || letter === '[' || letter === ']') {
+            let index = gri(0, counts.image - 1)
             let filename = '/assets/' + 'image' + '-' + index + '.png'
             el = `<span class='letter'><img class='dot-image' src='${filename}'/></span>`
         } else {
