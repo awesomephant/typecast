@@ -1,0 +1,28 @@
+body {
+    background: black;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.copy {
+    font-size: 5vw;
+}
+
+.images {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.images li {
+    flex-basis: 20vw;
+    flex-grow: 0;
+    margin: .2rem;
+}
+
+li img {
+    display: block;
+    width: 100%;
+}
