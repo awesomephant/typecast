@@ -29,7 +29,7 @@ const getImage = function (term, cb) {
           'Ocp-Apim-Subscription-Key': keys.azure1
         },
         qs: {
-            q: term + ' painting'
+            q: term + ' rennaiscance'
         }
       };
     request(options, function (error, response, body) {

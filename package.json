@@ -9,6 +9,8 @@
         "grunt-contrib-connect": "*",
         "express": "*",
         "socket.io": "*",
-        "request": "*"
+        "request": "*",
+        "sharp": "*",
+        "csv-parse": "*"
     }
 }

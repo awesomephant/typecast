@@ -3,3 +3,6 @@ node_modules/
 *.lock
 documentation/
 keys.json
+word-images/
+reslut.tsv
+output.png
