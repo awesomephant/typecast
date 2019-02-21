@@ -24,7 +24,7 @@ const extractWordImage = function () {
         let top = words[i].top;
         let width = words[i].width;
         let height = words[i].height;
-        sharp('test.png')
+        sharp('benjamin.jpg')
             .extract({ left: left, top: top, width: width, height: height })
             .toFile('./word-images/' + words[i].text + '.png', function (err) {
                 // Extract a region of the input image, saving in the same format
