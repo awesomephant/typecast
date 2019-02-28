@@ -11,6 +11,8 @@
         "socket.io": "*",
         "request": "*",
         "sharp": "*",
-        "csv-parse": "*"
+        "csv-parse": "*",
+        "fast-levenshtein": "*",
+        "command-line-args": "*"
     }
 }
