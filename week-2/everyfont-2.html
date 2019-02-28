@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Typecast Week 2: Every Font on Google Fonts</title>
+    <script>
+        const enableOffset = true;        
+    </script>
+    <script src="./everyfont.js"></script>
+    <style>
+        body {
+            --bg: rgb(250,252,251);
+            --outlineColour: black;
+            background: var(--bg); 
+            overflow: hidden;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .copy {
+            position: relative;
+            transition: 100ms;
+        }
+
+        .copy span {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: var(--bg);
+            text-shadow: 0 -1px 0 var(--outlineColour), 1px 0 0 var(--outlineColour), 0 1px 0 var(--outlineColour), -1px 0 0 var(--outlineColour);
+            /*color: rgba(0,0,0,.1);*/
+            font-size: 80vw;
+            box-shadow: 1px 
+        }
+
+        h1 {
+            font-family: 'IBM Plex Sans';
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--outlineColour);
+            margin-bottom: 1rem;
+            font-weight: normal;
+            font-size: 1.2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Every Font on Google Fonts</h1>
+    <main class="copy"></main>
+</body>
+</html>

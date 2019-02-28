@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Typecast Week 2: List Vocabulary</title>
+    <script>
+        const source = 'gutenberg'
+
+        // https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
+        const loadJSON = function (callback) {
+
+            var xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', './wordlist-' + source + '.json', true); // Replace 'my_data' with the path to your file
+            xobj.onreadystatechange = function () {
+                if (xobj.readyState == 4 && xobj.status == "200") {
+                    // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                    callback(xobj.responseText);
+                }
+            };
+            xobj.send(null);
+        }
+        
+        var wordList;
+
+        window.addEventListener('DOMContentLoaded', function () {
+            let imagesEl = document.querySelector('.images')
+            loadJSON(function (response) {
+                // Parse JSON string into object
+                wordList = JSON.parse(response);
+                wordList = wordList.sort(function (a, b) {
+                    if (a.text < b.text) { return -1 }
+                    if (a.text > b.text) { return 1 }
+                    return 0
+                })
+                console.log(wordList.length + ' words loaded.')
+                for (let i = 0; i < wordList.length; i++) {
+                    let word = wordList[i];
+                    if (word.text != '' && word.text != ' ') {
+                        for (let j = 0; j < word.instances.length; j++) {
+                            let wi = word.instances[j]
+                            let li = document.createElement('li')
+                            let filename = './word-images/' + source + '/' + word.text + '-' + j + '.png'
+                            li.innerHTML = `<span>${word.text}</span><img src='${filename}' />`;
+                            imagesEl.appendChild(li)
+                        }
+                    }
+                }
+
+            });
+        })
+    </script>
+    <style>
+        li {
+            list-style: none;
+            display: inline-block;
+            font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+            font-size: 40px;
+            font-weight: 300;
+            margin-right: 1rem;
+        }
+
+        span {
+            display: block;
+            font-size: .8rem;
+            margin-bottom: .1rem;
+        }
+
+        img {
+            height: 50px;
+            image-rendering: crisp-edges;
+        }
+
+        .copy {
+            margin-top: 2em;
+            font-size: 10vw;
+        }
+
+        .is-text {
+            position: relative;
+            top: -5px;
+        }
+    </style>
+</head>
+
+<body>
+    <ol class="images"></ol>
+</body>
+
+</html>

@@ -1,1 +1,1 @@
-tesseract benjamin.jpg result tsv
+tesseract %1.jpg result-%1 tsv
