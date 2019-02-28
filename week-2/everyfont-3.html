@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Typecast Week 2: Every Font on Google Fonts</title>
     <script>
-        const enableOffset = true;        
+        const enableOffset = false;        
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
     <script src="./everyfont.js"></script>
+    <script>
+
+        let ticking = false;
+
+        function handleMouseMove(pos) {
+            addCopy('Good Times', pos.x - 30, pos.y - 130)
+        }
+
+        window.addEventListener('mousemove', function (e) {
+            last_known_mouse_position = { x: e.clientX, y: e.clientY };
+
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    handleMouseMove(last_known_mouse_position);
+                    ticking = false;
+                });
+
+                ticking = true;
+            }
+        });
+    </script>
     <style>
         body {
-            --bg: rgb(250,252,251);
+            --bg: rgb(250, 252, 251);
             --outlineColour: black;
-            background: var(--bg); 
+            background: var(--bg);
             overflow: hidden;
         }
+
         * {
             margin: 0;
             padding: 0;
         }
+
         .copy {
             transition: 100ms;
             transform-origin: center;
@@ -29,23 +52,16 @@
             height: 100vh;
             width: 100vw;
         }
-        
+
         .copy span {
             position: absolute;
             display: block;
-            bottom: 0;
-            left: 0;
-            transform-origin: center;
-            width: 100vw;
-            /*border-right: 1px solid lightgray;
-            border-bottom: 1px solid rgb(200,200,200);*/
-            height: 100vh;
-            text-align: right;
+            text-align: center;
             color: var(--bg);
             text-shadow: 0 -1px 0 var(--outlineColour), 1px 0 0 var(--outlineColour), 0 1px 0 var(--outlineColour), -1px 0 0 var(--outlineColour);
             /*color: rgba(0,0,0,.1);*/
-            font-size: 80vw;
-            box-shadow: 1px 
+            font-size: 10vw;
+            white-space: nowrap;
         }
 
         h1 {
@@ -57,11 +73,12 @@
             font-weight: normal;
             font-size: 1.2rem;
         }
-
     </style>
 </head>
+
 <body>
-    <!-- <h1>Every Font on Google Fonts</h1> -->
+    <h1>Every Font on Google Fonts</h1>
     <main class="copy"></main>
 </body>
+
 </html>

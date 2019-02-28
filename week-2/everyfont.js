@@ -61,7 +61,22 @@ const pickFont = function () {
 
 let count = 0;
 
-const addCopy = function (letter) {
+let textIndex = 0;
+let text = "I"
+const autoType = function(){
+    //addCopy(text.substr(textIndex, 1))
+    addCopy(text.substr(gri(0, text.length), 1))
+    textIndex++;
+    if (textIndex > text.length){
+        textIndex = 0;
+    }
+}
+
+const startAutotype = function(){
+    window.setInterval(autoType,40)
+}
+
+const addCopy = function (letter,x,y) {
     let copyEl = document.querySelector('.copy')
     let spanEl = document.createElement('span')
     count++;
@@ -77,10 +92,19 @@ const addCopy = function (letter) {
         spanEl.style.fontFamily = font.family;
         
         if (enableOffset){
-            let offsetX = count * 4;
-            let offsetY = count * 3;
+            let offsetX = count * 2;
+            let offsetY = count * .5;
+            let scale = (count) 
             copyEl.style.transform = `translateY(${-offsetY}px) translateX(${-offsetX}px)`;
             spanEl.style.transform = `translateY(${offsetY}px) translateX(${offsetX}px)`;
+            //copyEl.style.transform = `scale(${1 + scale})`;
+            //spanEl.style.transform = `scale(${1 - scale * .5})`;
+            //spanEl.zIndex = `${count}`;
+            //spanEl.style.color = randomColor();
+        }
+        if (x && y){
+            spanEl.style.top = `${y}px`
+            spanEl.style.left = `${x}px`
         }
     }
     copyEl.appendChild(spanEl);
