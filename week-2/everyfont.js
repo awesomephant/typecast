@@ -86,10 +86,10 @@ const addCopy = function (letter,x,y) {
         let font = pickFont();
         if (!isLoaded(font.family)) {
             // if we need to load the typeface
-            addFontFace(font)
-            loadedFonts.push(font.family)
+            //addFontFace(font)
+         //   loadedFonts.push(font.family)
         }
-        spanEl.style.fontFamily = font.family;
+        //spanEl.style.fontFamily = font.family;
         
         if (enableOffset){
             let offsetX = count * 2;
