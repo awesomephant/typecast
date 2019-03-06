@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,35 @@
     <title>Typecast Week 2: Word Archive</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/levenshtein/1.0.5/levenshtein.min.js"></script>
     <script src="./app.js"></script>
+    <script>
+        activeSource = 2;
+        const text = `We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G. The training procedure for G is to maximize the probability of D making a mistake. This framework corresponds to a minimax two-player game. In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere. In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation. There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples. Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples. `;
+        window.setTimeout(function () {
+
+            let words = text.split(' ');
+            for (let i = 0; i < words.length; i++) {
+                let w = words[i]
+                appendImage(w);
+            }
+            let h2 = document.querySelector('h2')
+            h2.innerHTML = `${sources[activeSource].bookTitle}`
+        }, 1000)
+
+
+    </script>
     <style>
-        @keyframes wordIn {
-            from {transform: translateY(20px); opacity: 0;}
-            from {transform: translateY(0px); opacity: 1;}
-        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-weight: 300;
             font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
             padding: 10%;
         }
+
         li {
             list-style: none;
             display: inline-block;
@@ -33,26 +48,31 @@
         .is-image.has-smallAscender img {
             height: 62px;
         }
+
         .is-image.has-smallAscender.has-descender img {
             height: 78px;
         }
+
         .is-image.has-descender img {
             height: 64px;
             margin-bottom: -21px;
         }
+
         .is-image.has-descender.has-ascender img {
             height: 85px;
             margin-bottom: -19px;
         }
+
         .is-image.has-ascender img {
             height: 68px;
         }
+
         img {
             height: 50px;
             image-rendering: crisp-edges;
-            /*filter: contrast(2) grayscale(100%);*/
+            filter: contrast(2) grayscale(100%);
         }
-        
+
         h2 {
             max-width: 30em;
             font-size: 1rem;
@@ -69,22 +89,24 @@
             height: 50px;
             color: lightgray;
         }
-        .is-image {
-        }
+
+        .is-image {}
+
         .is-text {
             animation: 200ms wordIn both;
             position: relative;
             top: -5px;
         }
-
     </style>
 </head>
+
 <body>
-    <h2>Printed words from: <em>The 36-Line Bible</em> by Johannes Gutenberg</h2>
+    <h2></h2>
     <ol class="images">
         <li class='copy'>
             <main></main>
         </li>
     </ol>
 </body>
+
 </html>

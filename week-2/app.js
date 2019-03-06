@@ -13,7 +13,7 @@ class Source {
 }
 
 const sources = []
-let activeSource = 2;
+let activeSource = 1;
 
 const gri = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -50,7 +50,7 @@ const hasDescender = function (word) {
     return false
 }
 const hasAscender = function (word) {
-    if (word.match(/[tdfhklbABCDEFGHIJKLMNOPQRSTUVWXYZ]/g) != null) {
+    if (word.match(/[dfhklbABCDEFGHIJKLMNOPQRSTUVXYZ]/g) != null) {
         return true
     }
     return false
@@ -73,9 +73,7 @@ const updateCopy = function (copy) {
 }
 
 const isWordOnList = function (word, ignoreCase) {
-    
     let wordList = sources[activeSource].wordList;
-    
     for (let i = 0; i < wordList.length; i++) {
         if (ignoreCase === true) {
             if (word.toLowerCase() === wordList[i].text.toString().toLowerCase()) {
@@ -111,6 +109,8 @@ const appendImage = function (word) {
     let li = document.createElement('li')
     // if the word is on the list, add an image
     // else, just add the word as plain text
+    console.log(sources)
+    console.log(activeSource)
     let source = sources[activeSource].id;
     if (isWordOnList(word, false)) {
         let w = isWordOnList(word, false)
@@ -179,6 +179,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let dropDownEl = document.querySelector('.dropdown')
     let dropDownItems;
+
+
     for (let i = 0; i < sources.length; i++) {
         let s = sources[i];
         s.index = i;
@@ -187,21 +189,23 @@ window.addEventListener('DOMContentLoaded', function () {
             s.wordList = JSON.parse(response);
             //console.log(wordList)
         });
-        let li = document.createElement('li')
-        li.classList.add('dropdown-item')
-        li.setAttribute('data-index', i)
-        li.innerHTML = `<em>${s.bookTitle}</em> (${s.year}) by ${s.author}`
-        li.addEventListener('click', function(){
-            
-            for (let i = 0; i < dropDownItems.length; i++){
-                dropDownItems[i].classList.remove('active')
-            }
-            
-            activeSource = parseInt(this.getAttribute('data-index'))
-            this.classList.add('active')
-            console.log('Active Source: ' + activeSource)
-        })
-        dropDownEl.appendChild(li)
-        dropDownItems = document.querySelectorAll('.dropdown-item')
+        if (dropDownEl) {
+
+            let li = document.createElement('li')
+            li.classList.add('dropdown-item')
+            li.setAttribute('data-index', i)
+            li.innerHTML = `<em>${s.bookTitle}</em> (${s.year}) by ${s.author}`
+            li.addEventListener('click', function () {
+                for (let i = 0; i < dropDownItems.length; i++) {
+                    dropDownItems[i].classList.remove('active')
+                }
+
+                activeSource = parseInt(this.getAttribute('data-index'))
+                this.classList.add('active')
+                console.log('Active Source: ' + activeSource)
+            })
+            dropDownEl.appendChild(li)
+            dropDownItems = document.querySelectorAll('.dropdown-item')
+        }
     }
 })
