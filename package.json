@@ -13,6 +13,7 @@
         "sharp": "*",
         "csv-parse": "*",
         "fast-levenshtein": "*",
-        "command-line-args": "*"
+        "command-line-args": "*",
+        "pdfkit": "*"
     }
 }
