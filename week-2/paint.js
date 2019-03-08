@@ -8,7 +8,7 @@ let brush = {
     color: 'rgb(250, 252, 251)',
     stroke: 'rgb(5, 2, 1)',
     angle: -45,
-    text: 'Good Times',
+    text: 'Digital Aesthetics',
     fontFamily: 'Arial'
 }
 
