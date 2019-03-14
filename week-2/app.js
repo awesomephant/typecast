@@ -190,7 +190,9 @@ window.addEventListener('DOMContentLoaded', function () {
             //console.log(wordList)
         });
         if (dropDownEl) {
-
+            let summaryEl = document.querySelector('summary')
+            let detailsEl = document.querySelector('details')
+            
             let li = document.createElement('li')
             li.classList.add('dropdown-item')
             li.setAttribute('data-index', i)
@@ -203,6 +205,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 activeSource = parseInt(this.getAttribute('data-index'))
                 this.classList.add('active')
                 console.log('Active Source: ' + activeSource)
+                summaryEl.innerHTML = sources[activeSource].bookTitle;
+                detailsEl.removeAttribute('open')
             })
             dropDownEl.appendChild(li)
             dropDownItems = document.querySelectorAll('.dropdown-item')

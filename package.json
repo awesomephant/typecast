@@ -15,6 +15,7 @@
         "fast-levenshtein": "*",
         "command-line-args": "*",
         "pdfkit": "*",
-        "colors": "*"
+        "colors": "*",
+        "glob": "*"
     }
 }

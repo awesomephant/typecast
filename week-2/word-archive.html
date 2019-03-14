@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,29 @@
     <script src="./app.js"></script>
     <style>
         @keyframes wordIn {
-            from {transform: translateY(20px); opacity: 0;}
-            from {transform: translateY(0px); opacity: 1;}
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            from {
+                transform: translateY(0px);
+                opacity: 1;
+            }
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-weight: 300;
-            font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+            font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
             padding: 10%;
         }
+
         .images li {
             list-style: none;
             display: inline-block;
@@ -33,26 +44,31 @@
         .is-image.has-smallAscender img {
             height: 62px;
         }
+
         .is-image.has-smallAscender.has-descender img {
             height: 78px;
         }
+
         .is-image.has-descender img {
             height: 64px;
             margin-bottom: -21px;
         }
+
         .is-image.has-descender.has-ascender img {
             height: 85px;
             margin-bottom: -19px;
         }
+
         .is-image.has-ascender img {
             height: 68px;
         }
+
         img {
             height: 50px;
             image-rendering: crisp-edges;
             /*filter: contrast(2) grayscale(100%);*/
         }
-        
+
         h2 {
             max-width: 30em;
             font-size: 1rem;
@@ -69,8 +85,9 @@
             height: 50px;
             color: lightgray;
         }
-        .is-image {
-        }
+
+        .is-image {}
+
         .is-text {
             animation: 200ms wordIn both;
             position: relative;
@@ -78,11 +95,15 @@
         }
 
 
-        .dropdown {
+        .select-menu {
             border: 1px solid lightgray;
             border-radius: 2px;
             max-width: 30rem;
             margin-bottom: 3rem;
+            position: fixed;
+            top: 3rem;
+            left: 5%;
+            background: white;
         }
 
         .dropdown-item {
@@ -90,30 +111,55 @@
             padding: .8rem;
             display: block;
             border-bottom: 1px solid lightgray;
+            z-index: 10;
+            background: white;
+            width: 100%;
+            color: gray;
         }
 
         .dropdown-item:last-of-type {
             border-bottom: 0;
         }
-        .dropdown-item:hover, .dropdown-item.active {
-            background: rgb(250,250,250);
+
+        .dropdown-item:hover,
+        .dropdown-item.active {
+            background: rgb(250, 250, 250);
             cursor: pointer;
         }
 
-        .dropdown-item em {
-            color: gray;
-            display: block;
+        .dropdown-item.active {
+            z-index: 100;
         }
 
+        .dropdown-item em {
+            color: black;
+            display: block;
+            font-style: normal;
+        }
+        summary {
+            padding: .8rem;
+            border: 1px solid gray;
+        }
     </style>
 </head>
+
 <body>
-    <ul class="dropdown">
-    </ul>
+    <h1></h1>
+    <div class="controls">
+        <details class="select-menu">
+            <summary class="btn" aria-haspopup="true">
+                Select Font
+                <div class="dropdown-caret"></div>
+            </summary>
+            <ul class="dropdown">
+            </ul>
+        </details>
+   </div>
     <ol class="images">
         <li class='copy'>
             <main></main>
         </li>
     </ol>
 </body>
+
 </html>
