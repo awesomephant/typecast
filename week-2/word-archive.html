@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Typecast Week 2: Word Archive</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/levenshtein/1.0.5/levenshtein.min.js"></script>
+    <script src="./textBalancer.js"></script>
+    <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
     <script src="./app.js"></script>
     <style>
         @keyframes wordIn {
@@ -31,42 +33,52 @@
             font-weight: 300;
             font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
             padding: 10%;
+            --fontSize: 1;
         }
 
         .images li {
             list-style: none;
             display: inline-block;
             font-size: 40px;
-            margin-right: 1rem;
-            mix-blend-mode: multiply;
+            margin-right: calc(1rem * var(--fontSize));
         }
 
-        .is-image.has-smallAscender img {
-            height: 62px;
+        [data-baseline=true] .is-image.has-smallAscender img {
+            height: calc(62px * var(--fontSize));
         }
 
-        .is-image.has-smallAscender.has-descender img {
-            height: 78px;
+        [data-baseline=true] .is-image.has-smallAscender.has-descender img {
+            height: calc(78px * var(--fontSize));
         }
 
-        .is-image.has-descender img {
-            height: 64px;
-            margin-bottom: -21px;
+        [data-baseline=true] .is-image.has-descender img {
+            height: calc(64px * var(--fontSize));
+            margin-bottom: calc(-21px * var(--fontSize));
         }
 
-        .is-image.has-descender.has-ascender img {
-            height: 85px;
-            margin-bottom: -19px;
+        [data-baseline=true] .is-image.has-descender.has-ascender img {
+            height: calc(85px * var(--fontSize));
+            margin-bottom: calc(-19px * var(--fontSize));
         }
 
-        .is-image.has-ascender img {
-            height: 68px;
+        [data-baseline=true] .is-image.has-ascender img {
+            height: calc(68px * var(--fontSize));
         }
 
         img {
-            height: 50px;
+            height: calc(50px * var(--fontSize));
+        }
+
+        [data-rendering='crisp'] img {
             image-rendering: crisp-edges;
-            /*filter: contrast(2) grayscale(100%);*/
+        }
+
+        [data-rendering='interpolate'] img {
+            image-rendering: auto;
+        }
+
+        [data-grayscale='true'] img {
+            filter: contrast(1.2) grayscale(100%);
         }
 
         h2 {
@@ -94,15 +106,62 @@
             top: -5px;
         }
 
+        .about {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+
+        }
+
+        .controls {
+            position: fixed;
+            top: 60vh;
+            left: 5%;
+            z-index: 1000;
+            width: 25rem;
+            background: white;
+            border: 1px solid lightgray;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px -4px rgba(0,0,0,.3)
+        }
+        .window-header {
+            padding: .5rem;
+            border-bottom: 1px solid lightgray;
+            font-weight: 600;
+            margin-bottom: -1rem;
+            cursor: grab;
+        }
+        .is-pointer-down .window-header {
+            cursor: grabbing;
+        }
+        .window-main {
+            padding: .5rem;
+        }
+
+        .controls h3 {
+            margin-top: 1.5rem;
+            margin-bottom: .5rem;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        h1 {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            left: 0;
+            font-weight: normal;
+            text-align: center;
+            font-size: 1.2rem;
+            padding-top: 1em;
+        }
 
         .select-menu {
             border: 1px solid lightgray;
             border-radius: 2px;
             max-width: 30rem;
-            margin-bottom: 3rem;
-            position: fixed;
-            top: 3rem;
-            left: 5%;
+            margin-bottom: 1rem;
             background: white;
         }
 
@@ -136,30 +195,173 @@
             display: block;
             font-style: normal;
         }
+
+        input[type=range] {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .radio label {
+            padding: 1rem;
+            flex-basis: 50%;
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: flex;
+            border: 1px solid lightgray;
+            border-radius: 2px;
+        }
+
+        .radio label:first-of-type {
+            border-right: 1px solid lightgray;
+        }
+
+        input[type=radio] {
+            width: 0;
+            height: 0;
+            display: block;
+            appearance: none;
+            position: absolute;
+            left: -10000px;
+        }
+
+        input[type=radio]:checked+label {
+            background: rgb(244, 245, 245);
+        }
+
         summary {
             padding: .8rem;
             border: 1px solid gray;
+            cursor: pointer;
+        }
+
+        summary:first-of-type {
+            border: 0;
+        }
+
+        .about p {
+            padding: 1rem;
+            font-size: 1.2rem;
+            margin-top: -1rem;
+            padding-bottom: 0;
+            hyphens: auto;
+            font-weight: 400;
+            margin-bottom: .5em;
+        }
+
+        .about p:last-of-type {
+            padding-bottom: 1em;
+        }
+
+        .about a {
+            color: black;
+
         }
     </style>
 </head>
 
-<body>
-    <h1></h1>
-    <div class="controls">
-        <details class="select-menu">
-            <summary class="btn" aria-haspopup="true">
-                Select Font
-                <div class="dropdown-caret"></div>
-            </summary>
-            <ul class="dropdown">
-            </ul>
-        </details>
-   </div>
+<body data-rendering='crisp' data-baseline='true'>
+    <h1>Archive Type</h1>
+    <div class="controls window" id='pickTypeface'>
+        <header class="window-header">
+            Settings
+        </header>
+        <main class="window-main">
+            <h3>Source Text</h3>
+            <details class="select-menu">
+                <summary class="btn" aria-haspopup="true">
+                    Select Source Text
+                    <div class="dropdown-caret"></div>
+                </summary>
+                <ul class="dropdown">
+                </ul>
+            </details>
+            <div class="control">
+                <h3>Type Size</h3>
+                <input type="range" step='.01' min='.2' value='1' max='5' name="fontSize" id="fontSize">
+            </div>
+
+            <div class="control radio">
+                <h3>Rendering Mode</h3>
+                <div class="radio-group">
+                    <input type="radio" name="rendering" id="crisp" checked='true' value='crisp'>
+                    <label for="crisp">Crisp</label>
+                    <input type="radio" name="rendering" id="interpolate" value='interpolate'>
+                    <label for="interpolate">Interpolate</label>
+                </div>
+            </div>
+            <div class="control radio">
+                <h3>Grayscale</h3>
+                <div class="radio-group">
+                    <input type="radio" id='grayscale-off' name="grayscale" checked='true' value='false'>
+                    <label for="grayscale-off">Off</label>
+                    <input type="radio" id='grayscale-on' name="grayscale" value='true'>
+                    <label for="grayscale-on">On</label>
+                </div>
+            </div>
+            <div class="control radio">
+                <h3>Baseline Adjustment</h3>
+                <div class="radio-group">
+                    <input type="radio" id='baseline-off' name="baseline" value='false'>
+                    <label for="baseline-off">Off</label>
+                    <input type="radio" id='baseline-on' name="baseline" checked value='true'>
+                    <label for="baseline-on">On</label>
+                </div>
+            </div>
+        </main>
+    </div>
+    <details class="select-menu about">
+        <summary class="btn" aria-haspopup="true">
+            About
+            <div class="dropdown-caret"></div>
+        </summary>
+        <p>
+            <em>Archive Type</em> is an experimental tool developed by <a href="http://maxkoehler.com">Max Kohler</a> as
+            part of the <em>Typecast</em> elective at the Royal College of Art.
+        </p>
+        <p>It is based on a simple premise: What if you could only write using words and letterforms that are already
+            part of the printed record? What happens when letterforms from printed works of literature are re-arranged
+            into new sentences? Do they retain their history?</p>
+        <p>The work is realised by scanning the source text in its entirety. Then the open source OCR engine <a
+                href="https://github.com/tesseract-ocr/tesseract">Tesseract</a> is used to isolate and extract every
+            individual word from the scanned pages.</p>
+        <p>
+            When you type a word, the closest word from the source text is determined using the <a
+                href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> and the scanned
+            word-image is inserted into the page. Where multiple copies of the same word exist in the source text, one
+            is selected at random.</p>
+        <p>The source code is <a href='https://github.com/awesomephant/typecast'>available here</a>.</p>
+    </details>
     <ol class="images">
         <li class='copy'>
             <main></main>
         </li>
     </ol>
+    <script>
+        currentRadio = ''
+
+        function handleRadio(e) {
+            currentRadio = e.srcElement.value;
+            document.body.setAttribute(`data-${e.srcElement.getAttribute('name')}`, currentRadio)
+        }
+        window.addEventListener('DOMContentLoaded', function () {
+            let radioEls = document.querySelectorAll('input[type=radio]');
+            for (let i = 0; i < radioEls.length; i++) {
+                radioEls[i].addEventListener('click', function (e) { handleRadio(e) })
+            }
+
+            let rangeEl = document.querySelector('#fontSize')
+            rangeEl.addEventListener('input', function () {
+                document.body.style.setProperty("--fontSize", rangeEl.value);
+            }, false);
+
+            var draggie = new Draggabilly( '.window', {
+                handle: '.window-header'
+              });
+        })
+    </script>
 </body>
 
 </html>
