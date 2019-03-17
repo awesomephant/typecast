@@ -9,17 +9,19 @@
     <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
     <script src="/week-2/paint.js"></script>
+    <link rel="stylesheet" href="controls.css">
     <style>
         body {
             overflow: hidden;
             font-family: 'IBM Plex Sans';
-            background: rgb(250,250,250);
+            background: rgb(250, 250, 250);
         }
 
         * {
             margin: 0;
             padding: 0;
         }
+
         h1 {
             text-align: center;
             position: absolute;
@@ -31,57 +33,56 @@
             font-weight: normal;
             font-size: 1.2rem;
         }
-
-        .window {
-            background: white;
-            position: fixed;
-            visibility: hidden;
-            width: 30rem;
-            border: 1px solid black;
-            border-radius: 2px;
-            z-index: 1000;
-        }
-
-        .window-header{
-            padding: .5rem;
-            border-bottom: 1px solid black;
-        }
-        .window-header h2 {
-            font-weight: normal;
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        .window-content {
-            padding: .5rem;
-        }
-
     </style>
 </head>
 
 <body>
-    <aside class='window'>
-        <header class="window-header"><h2>Brush Settings</h2></header>
-        <main class="window-content">
+    <aside class='window controls'>
+        <header class="window-header">Brush Settings</header>
+        <main class="window-main">
             <div class="control">
-                <span class="control-title">Text</span>
-                <input type="text" name="brushText" id="brush-text"/>
+                <h3>Text</h3>
+                <input type="text" name="brushText" value='Good Times' id="brush-text" />
+            </div>
+            <div class="control" id='pickTypeface'>
+                <h3>Typeface</h3>
+                <details class="select-menu">
+                    <summary class="btn" aria-haspopup="true">
+                        Select Typeface
+                    </summary>
+                    <ul class="dropdown">
+                        <li class='dropdown-item'>Helvetica</li>
+                        <li class='dropdown-item'>Times New Roman</li>
+                        <li class='dropdown-item'>Courier New</li>
+                    </ul>
+                </details>
+
             </div>
             <div class="control">
                 <span class="control-title">Fill</span>
-                <input type="color" name="brushFill" id="brush-fill"/>
+                <input type="color" value='#ffffff' name="brushFill" id="brush-fill" />
             </div>
             <div class="control">
-                <span class="control-title">Stroke</span>
-                <input type="color" name="brushStroke" id="brush-stroke"/>
+                <h3 class="control-title">Stroke</h3>
+                <input type="color" value='#010101' name="brushStroke" id="brush-stroke" />
             </div>
             <div class="control">
-                <span class="control-title">Size</span>
-                <input type="range" name="brushSize" id="brush-size" min='10' max='800' step='.1'/>
+                <h3 class="control-title">Size</h3>
+                <input type="range" name="brushSize" id="brush-size" min='10' max='800' step='.1' />
             </div>
             <div class="control">
-                <span class="control-title">Angle</span>
-                <input type="range" name="brushAngle" id="brush-angle" min='00' max='360' step='.1'/>
+                <h3 class="control-title">Angle</h3>
+                <input type="range" name="brushAngle" id="brush-angle" min='00' max='360' step='.1' />
+            </div>
+
+            <div class="control radio">
+                <h3 class="control-title">Rotate</h3>
+                <div class="radio-group" id='brush-rotate'>
+                    <input type="radio" id='rotate-off' name="rotate" checked='true' value='false'>
+                    <label for="rotate-off">Off</label>
+                    <input type="radio" id='rotate-on' name="rotate" value='true'>
+                    <label for="rotate-on">On</label>
+                </div>
             </div>
         </main>
     </aside>

@@ -10,6 +10,7 @@
     <script src="./textBalancer.js"></script>
     <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
     <script src="./app.js"></script>
+    <link rel="stylesheet" href="controls.css">
     <style>
         @keyframes wordIn {
             from {
@@ -114,38 +115,6 @@
 
         }
 
-        .controls {
-            position: fixed;
-            top: 60vh;
-            left: 5%;
-            z-index: 1000;
-            width: 25rem;
-            background: white;
-            border: 1px solid lightgray;
-            border-radius: 2px;
-            box-shadow: 0 2px 5px -4px rgba(0,0,0,.3)
-        }
-        .window-header {
-            padding: .5rem;
-            border-bottom: 1px solid lightgray;
-            font-weight: 600;
-            margin-bottom: -1rem;
-            cursor: grab;
-        }
-        .is-pointer-down .window-header {
-            cursor: grabbing;
-        }
-        .window-main {
-            padding: .5rem;
-        }
-
-        .controls h3 {
-            margin-top: 1.5rem;
-            margin-bottom: .5rem;
-            font-size: 1rem;
-            font-weight: normal;
-        }
-
         h1 {
             position: absolute;
             top: 0;
@@ -155,90 +124,6 @@
             text-align: center;
             font-size: 1.2rem;
             padding-top: 1em;
-        }
-
-        .select-menu {
-            border: 1px solid lightgray;
-            border-radius: 2px;
-            max-width: 30rem;
-            margin-bottom: 1rem;
-            background: white;
-        }
-
-        .dropdown-item {
-            font-size: 1rem;
-            padding: .8rem;
-            display: block;
-            border-bottom: 1px solid lightgray;
-            z-index: 10;
-            background: white;
-            width: 100%;
-            color: gray;
-        }
-
-        .dropdown-item:last-of-type {
-            border-bottom: 0;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item.active {
-            background: rgb(250, 250, 250);
-            cursor: pointer;
-        }
-
-        .dropdown-item.active {
-            z-index: 100;
-        }
-
-        .dropdown-item em {
-            color: black;
-            display: block;
-            font-style: normal;
-        }
-
-        input[type=range] {
-            display: block;
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        .radio label {
-            padding: 1rem;
-            flex-basis: 50%;
-            cursor: pointer;
-        }
-
-        .radio-group {
-            display: flex;
-            border: 1px solid lightgray;
-            border-radius: 2px;
-        }
-
-        .radio label:first-of-type {
-            border-right: 1px solid lightgray;
-        }
-
-        input[type=radio] {
-            width: 0;
-            height: 0;
-            display: block;
-            appearance: none;
-            position: absolute;
-            left: -10000px;
-        }
-
-        input[type=radio]:checked+label {
-            background: rgb(244, 245, 245);
-        }
-
-        summary {
-            padding: .8rem;
-            border: 1px solid gray;
-            cursor: pointer;
-        }
-
-        summary:first-of-type {
-            border: 0;
         }
 
         .about p {
