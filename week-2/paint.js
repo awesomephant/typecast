@@ -51,10 +51,12 @@ function bindEvents() {
     let textEl = document.querySelector('#brush-text')
     let fillEl = document.querySelector('#brush-fill')
     let strokeEl = document.querySelector('#brush-stroke')
+    let backgroundEl = document.querySelector('#background')
     let sizeEl = document.querySelector('#brush-size')
     let angleEl = document.querySelector('#brush-angle')
     let rotateEl = document.querySelectorAll('#brush-rotate input')
     let dropDownEl = document.querySelectorAll('#brush-rotate input')
+    let saveEl = document.querySelector('#save')
 
     textEl.addEventListener('change', function (e) {
         brush.text = e.srcElement.value;
@@ -65,11 +67,19 @@ function bindEvents() {
     strokeEl.addEventListener('change', function (e) {
         brush.stroke = e.srcElement.value;
     })
+    backgroundEl.addEventListener('change', function (e) {
+        c.canvas.style.background = e.srcElement.value;
+    })
     sizeEl.addEventListener('change', function (e) {
         brush.size = e.srcElement.value;
     })
     angleEl.addEventListener('change', function (e) {
         brush.angle = e.srcElement.value;
+    })
+    saveEl.addEventListener('click', function (e) {
+        e.preventDefault();
+        let image = c.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+        window.location.href = image; // it will save locally
     })
     if (dropDownEl) {
         let summaryEl = document.querySelector('#pickTypeface summary')

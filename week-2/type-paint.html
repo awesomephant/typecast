@@ -8,7 +8,7 @@
     <title>Typecast Week 2: Every Font on Google Fonts</title>
     <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
-    <script src="/week-2/paint.js"></script>
+    <script src="./paint.js"></script>
     <link rel="stylesheet" href="controls.css">
     <style>
         body {
@@ -67,6 +67,10 @@
                 <input type="color" value='#010101' name="brushStroke" id="brush-stroke" />
             </div>
             <div class="control">
+                <h3 class="control-title">Background</h3>
+                <input type="color" value='#ffffff' name="background" id="background" />
+            </div>
+            <div class="control">
                 <h3 class="control-title">Size</h3>
                 <input type="range" name="brushSize" id="brush-size" min='10' max='800' step='.1' />
             </div>
@@ -83,6 +87,9 @@
                     <input type="radio" id='rotate-on' name="rotate" value='true'>
                     <label for="rotate-on">On</label>
                 </div>
+            </div>
+            <div class="control">
+                <a href="#1" class="btn" id='save'>Save as PNG</a>
             </div>
         </main>
     </aside>
