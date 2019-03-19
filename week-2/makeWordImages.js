@@ -89,7 +89,7 @@ function getWordImage(text, wi, index, cb) {
     let pos = { left: wi.left, top: wi.top, width: wi.width, height: wi.height }
     //console.log(wi)
     //console.log(wi.file)
-    let outputPath = './word-images/' + source + '/' + text + '-' + index + '.png';
+    let outputPath = './word-images/' + source + '/' + text.toLowerCase() + '-' + index + '.png';
 //    console.log(outputPath)
     sharp(wi.file)
         .extract(pos)
