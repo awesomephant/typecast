@@ -1,6 +1,7 @@
 let copy = '';
 let copyEl;
 const source = 'gutenberg'
+const baseURL = 'http://avh-sammlung.de/max'
 
 class Source {
     constructor(id, bookTitle, year, author) {
@@ -24,7 +25,7 @@ const loadJSON = function (source, callback) {
 
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', './wordlist-' + source.id + '.json', true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', baseURL + './wordlist-' + source.id + '.json', true); // Replace 'my_data' with the path to your file
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -111,8 +112,7 @@ const appendImage = function (word) {
     // else, just add the word as plain text
     console.log(sources)
     console.log(activeSource)
-    //let baseURL = 'http://avh-sammlung.de/max'
-    let baseURL = '.'
+    //let baseURL = '.'
     let source = sources[activeSource].id;
     if (isWordOnList(word, false)) {
         let w = isWordOnList(word, false)
