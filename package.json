@@ -16,6 +16,7 @@
         "command-line-args": "*",
         "pdfkit": "*",
         "colors": "*",
-        "glob": "*"
+        "glob": "*",
+        "cli-progress": "*"
     }
 }

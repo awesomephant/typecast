@@ -111,11 +111,13 @@ const appendImage = function (word) {
     // else, just add the word as plain text
     console.log(sources)
     console.log(activeSource)
+    //let baseURL = 'http://avh-sammlung.de/max'
+    let baseURL = '.'
     let source = sources[activeSource].id;
     if (isWordOnList(word, false)) {
         let w = isWordOnList(word, false)
         let instance = gri(0, w.count - 1)
-        let filename = './word-images/' + source + '/' + w.text + '-' + instance + '.png'
+        let filename = baseURL + '/word-images/' + source + '/' + w.text + '-' + instance + '.png'
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', word)
@@ -123,7 +125,7 @@ const appendImage = function (word) {
         console.log("Couldn't find exact match, ignoring case.")
         let w = isWordOnList(word, true)
         let instance = gri(0, w.count - 1)
-        let filename = './word-images/' + source + '/' + w.text + '-' + instance + '.png'
+        let filename = baseURL + '/word-images/' + source + '/' + w.text + '-' + instance + '.png'
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', word)
@@ -132,7 +134,7 @@ const appendImage = function (word) {
         console.log("Couldn't find case-insensitive match, finding closest word.")
         let closeWord = findClosestWord(word);
         let instance = gri(0, closeWord.count - 1)
-        let filename = './word-images/' + source + '/' + closeWord.text + '-' + instance + '.png'
+        let filename = baseURL + '/word-images/' + source + '/' + closeWord.text + '-' + instance + '.png'
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', closeWord.text)
@@ -178,6 +180,7 @@ window.addEventListener('DOMContentLoaded', function () {
     sources.push(new Source('nyt', 'The New York Times', 2019, ''))
     sources.push(new Source('darwin', 'On the Origin of Species', 1857, 'Charles Darwin'))
     sources.push(new Source('orwell', 'Down and out in Paris and London', 1933, 'George Orwell'))
+    sources.push(new Source('batman', 'Batman: The Dark Knight Returns', 1986, 'Frank Miller'))
 
     let dropDownEl = document.querySelector('#pickTypeface .dropdown')
     let dropDownItems;
@@ -193,7 +196,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (dropDownEl) {
             let summaryEl = document.querySelector('#pickTypeface summary')
             let detailsEl = document.querySelector('#pickTypeface details')
-            
+
             let li = document.createElement('li')
             li.classList.add('dropdown-item')
             li.setAttribute('data-index', i)

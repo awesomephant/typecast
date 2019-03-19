@@ -1,5 +1,5 @@
 
-for %%i in (./scans/%1/*.tif) do (tesseract ./scans/%1/"%%i" "./scans/%1/partial-text/%%i")
+for %%i in (./scans/%1/*.jpg) do (tesseract ./scans/%1/"%%i" "./scans/%1/partial-text/%%i")
 node mergePartialText.js -s %1
-for %%i in (./scans/%1/*.tif) do (tesseract ./scans/%1/"%%i" "./scans/%1/ocr-%%i" tsv)
+for %%i in (./scans/%1/*.jpg) do (tesseract ./scans/%1/"%%i" "./scans/%1/ocr-%%i" tsv)
 node makeWordImages -s %1
