@@ -7,10 +7,13 @@ word-images/
 reslut.tsv
 output.png
 benjamin.jpg
-wordlist-*.json
 *.pdf
 *.indd
 *.blend
 *.blend1
 /week-2/scans
 /books/texts/
+*.otf
+*.MOV
+*.mov
+/tracking

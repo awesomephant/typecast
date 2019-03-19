@@ -3,6 +3,10 @@ const fs = require('fs');
 const colors = require('colors');
 const levenshtein = require('fast-levenshtein');
 
+const options = commandLineArgs(optionDefinitions)
+
+var source = options.src;
+
 // Create a document
 
 function inchesToPoints(inches) {
