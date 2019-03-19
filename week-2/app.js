@@ -2,7 +2,7 @@ let copy = '';
 let copyEl;
 //const source = 'gutenberg'
 const baseURL = 'http://avh-sammlung.de/max'
-const baseURL = '.'
+//const baseURL = '.'
 
 class Source {
     constructor(id, bookTitle, year, author) {
