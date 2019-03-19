@@ -1,7 +1,7 @@
 let copy = '';
 let copyEl;
-const source = 'gutenberg'
-//const baseURL = 'http://avh-sammlung.de/max'
+//const source = 'gutenberg'
+const baseURL = 'http://avh-sammlung.de/max'
 const baseURL = '.'
 
 class Source {
@@ -118,7 +118,7 @@ const appendImage = function (word) {
     if (isWordOnList(word, false)) {
         let w = isWordOnList(word, false)
         let instance = gri(0, w.count - 1)
-        let filename = baseURL + '/word-images/' + source + '/' + w.text.toLowerCase() + '-' + instance + '.png'
+        let filename = baseURL + '/word-images/' + source + '/' + w.text + '-' + instance + '.png'
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', word)
@@ -126,7 +126,7 @@ const appendImage = function (word) {
         console.log("Couldn't find exact match, ignoring case.")
         let w = isWordOnList(word, true)
         let instance = gri(0, w.count - 1)
-        let filename = baseURL + '/word-images/' + source + '/' + w.text.toLowerCase() + '-' + instance + '.png'
+        let filename = baseURL + '/word-images/' + source + '/' + w.text + '-' + instance + '.png'
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', word)
@@ -135,7 +135,7 @@ const appendImage = function (word) {
         console.log("Couldn't find case-insensitive match, finding closest word.")
         let closeWord = findClosestWord(word);
         let instance = gri(0, closeWord.count - 1)
-        let filename = baseURL + '/word-images/' + source + '/' + closeWord.text.toLowerCase() + '-' + instance + '.png'
+        let filename = baseURL + '/word-images/' + source + '/' + closeWord.text + '-' + instance + '.png'
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', closeWord.text)
