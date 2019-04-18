@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Typecast Week 2: Word Archive</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/levenshtein/1.0.5/levenshtein.min.js"></script>
+    <script src="./textBalancer.js"></script>
+    <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+    <script src="./app.js"></script>
+    <link rel="stylesheet" href="controls.css">
+    <style>
+        @keyframes wordIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            from {
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-weight: 300;
+            font-family: 'IBM Plex Sans', 'Courier New', Courier, monospace;
+            padding: 10%;
+            --fontSize: 1;
+        }
+
+        .images li {
+            list-style: none;
+            display: inline-block;
+            font-size: 40px;
+            margin-right: calc(1rem * var(--fontSize));
+        }
+
+        [data-baseline=true] .is-image.has-smallAscender img {
+            height: calc(62px * var(--fontSize));
+        }
+
+        [data-baseline=true] .is-image.has-smallAscender.has-descender img {
+            height: calc(78px * var(--fontSize));
+        }
+
+        [data-baseline=true] .is-image.has-descender img {
+            height: calc(64px * var(--fontSize));
+            margin-bottom: calc(-21px * var(--fontSize));
+        }
+
+        [data-baseline=true] .is-image.has-descender.has-ascender img {
+            height: calc(85px * var(--fontSize));
+            margin-bottom: calc(-19px * var(--fontSize));
+        }
+
+        [data-baseline=true] .is-image.has-ascender img {
+            height: calc(68px * var(--fontSize));
+        }
+
+        img {
+            height: calc(50px * var(--fontSize));
+        }
+
+        [data-rendering='crisp'] img {
+            image-rendering: crisp-edges;
+        }
+
+        [data-rendering='interpolate'] img {
+            image-rendering: auto;
+        }
+
+        [data-grayscale='true'] img {
+            filter: contrast(1.2) grayscale(100%);
+        }
+
+        h2 {
+            max-width: 30em;
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        h2 em {
+            color: gray;
+        }
+
+        .copy {
+            font-size: 40px;
+            height: 50px;
+            color: lightgray;
+        }
+
+        .is-image {}
+
+        .is-text {
+            animation: 200ms wordIn both;
+            position: relative;
+            top: -5px;
+        }
+
+        .about {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+
+        }
+
+        h1 {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            left: 0;
+            font-weight: normal;
+            text-align: center;
+            font-size: 1.2rem;
+            padding-top: 1em;
+        }
+
+        .about p {
+            padding: 1rem;
+            font-size: 1.2rem;
+            margin-top: -1rem;
+            padding-bottom: 0;
+            hyphens: auto;
+            font-weight: 400;
+            margin-bottom: .5em;
+        }
+
+        .about p:last-of-type {
+            padding-bottom: 1em;
+        }
+
+        .about a {
+            color: black;
+
+        }
+    </style>
+</head>
+
+<body data-rendering='crisp' data-baseline='true'>
+    <h1>Archive Type</h1>
+    <ol class="images">
+        <li class='copy'>
+            <main></main>
+        </li>
+    </ol>
+</body>
+
+</html>

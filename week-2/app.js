@@ -1,8 +1,8 @@
 let copy = '';
 let copyEl;
 //const source = 'gutenberg'
-const baseURL = 'http://avh-sammlung.de/max'
-//const baseURL = '.'
+//const baseURL = 'http://avh-sammlung.de/max'
+const baseURL = '.'
 
 class Source {
     constructor(id, bookTitle, year, author) {
@@ -176,7 +176,6 @@ window.addEventListener('DOMContentLoaded', function () {
     init()
 
     sources.push(new Source('gutenberg', 'The 36-Line Bible', 1495, 'Johannes Gutenberg'))
-    sources.push(new Source('gutenberg-2', 'The 36-Line Bible', 1495, 'Johannes Gutenberg'))
     sources.push(new Source('benjamin', 'The work of art in the age of mechanical reproduction', 1935, 'Walter Benjamin'))
     sources.push(new Source('nyt', 'The New York Times', 2019, ''))
     sources.push(new Source('darwin', 'On the Origin of Species', 1857, 'Charles Darwin'))
