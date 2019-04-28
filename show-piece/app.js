@@ -1,8 +1,8 @@
 let copy = '';
 let copyEl;
 //const source = 'gutenberg'
-//const baseURL = 'http://avh-sammlung.de/max/word-images/edit/'
-const baseURL = './word-images/edit/'
+const baseURL = 'http://avh-sammlung.de/max/word-images/edit/'
+//const baseURL = './word-images/edit/'
 
 class Source {
     constructor(id, bookTitle, year, author) {
