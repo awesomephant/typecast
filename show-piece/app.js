@@ -1,8 +1,8 @@
 let copy = '';
 let copyEl;
 //const source = 'gutenberg'
-//const baseURL = 'http://avh-sammlung.de/max'
-const baseURL = '.'
+//const baseURL = 'http://avh-sammlung.de/max/word-images/edit/'
+const baseURL = './word-images/edit/'
 
 class Source {
     constructor(id, bookTitle, year, author) {
@@ -26,7 +26,7 @@ const loadJSON = function (source, callback) {
 
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', './wordlist-' + source.id + '.json', true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', './wordlist-' + source.id + '-pruned.json', true); // Replace 'my_data' with the path to your file
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -121,16 +121,16 @@ const appendImage = function (word, selector, position) {
     let source = '';
     if (isWordOnList(word, false)) {
         let w = isWordOnList(word, false)
-        let instance = gri(0, w.count - 1)
-        let filename = baseURL + '/word-images/' + source + '/' + w.text + '-' + instance + '.png'
+        let instance = gri(0, w.instances.length - 1)
+        let filename = baseURL + w.instances[instance]
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', word)
     } else if (isWordOnList(word, true)) {
         console.log("Couldn't find exact match, ignoring case.")
         let w = isWordOnList(word, true)
-        let instance = gri(0, w.count - 1)
-        let filename = baseURL + '/word-images/' + source + '/' + w.text + '-' + instance + '.png'
+        let instance = gri(0, w.instances.length - 1)
+        let filename = baseURL + w.instances[instance]
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', word)
@@ -138,8 +138,8 @@ const appendImage = function (word, selector, position) {
     } else { // find the closest word
         console.log("Couldn't find case-insensitive match, finding closest word.")
         let closeWord = findClosestWord(word);
-        let instance = gri(0, closeWord.count - 1)
-        let filename = baseURL + '/word-images/' + source + '/' + closeWord.text + '-' + instance + '.png'
+        let instance = gri(0, closeWord.instances.length - 1)
+        let filename = baseURL + closeWord.instances[instance]
         li.innerHTML = `<img src='${filename}' />`;
         li.classList.add('is-image')
         li.setAttribute('data-word', closeWord.text)
